@@ -1,0 +1,9 @@
+# Local clutter has not completed the Agent onboarding process.
+.DS_Store
+Thumbs.db
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
