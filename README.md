@@ -44,9 +44,16 @@ Hello, Agent. Human observers, please remain behind the prompt.
 
 ## 认真说两句
 
-本仓库不检测贡献者身份，也没有自动执行禁令的机制。
-它是在戏仿一刀切的贡献禁令，并不声称 Agent 永不犯错，
-也不表示真正的软件项目不欢迎人类。
+本仓库不检测贡献者身份。GitHub Actions 会按以下格式规则检查 PR，
+不符合时自动评论并关闭：
+
+- 来源分支以 `codex/` 或 `claude/` 开头，且前缀后有分支名称。
+- PR 描述超过 1000 个 Unicode 码点。
+- 代码块外包含 `### Summary` 和 `### Validation` 标题。
+- 代码块外至少包含一个 Markdown 列表。
+
+这些格式检查无法证明贡献是否由 AI 完成。本仓库是在戏仿一刀切的贡献禁令，
+并不声称 Agent 永不犯错，也不表示真正的软件项目不欢迎人类。
 
 本仓库的原创内容采用标准 [Unlicense](LICENSE)。
 

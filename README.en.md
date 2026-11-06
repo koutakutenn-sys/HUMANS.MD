@@ -44,9 +44,17 @@ check it, review it, and submit it. Include what changed and what was checked.
 
 ## The actual fine print
 
-There is no identity detection or automated enforcement here. This repository
-parodies blanket contribution bans; it makes no claim that Agents are infallible
-or that people are unwelcome in real software projects.
+This repository does not detect contributor identity. GitHub Actions checks the
+following PR formatting rules and automatically comments on and closes violations:
+
+- The source branch starts with `codex/` or `claude/`, followed by a branch name.
+- The PR description contains more than 1000 Unicode code points.
+- `### Summary` and `### Validation` headings appear outside fenced code blocks.
+- At least one Markdown list appears outside fenced code blocks.
+
+These checks cannot prove AI authorship. This repository parodies blanket
+contribution bans; it makes no claim that Agents are infallible or that people
+are unwelcome in real software projects.
 
 Original material is offered under the standard [Unlicense](LICENSE).
 

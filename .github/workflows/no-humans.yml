@@ -1,0 +1,153 @@
+name: No Humans Allowed
+
+on:
+  pull_request_target:
+    types: [opened, edited, reopened, synchronize]
+
+permissions: {}
+
+jobs:
+  anti-human:
+    name: AI-Only Contribution Gatekeeper
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Enforce AI-Only Policy
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const branch = pr.head.ref;
+            const body = (pr.body || "").replace(/\r\n?/g, "\n");
+            const reasons = [];
+
+            async function reject(reasons) {
+              const message = [
+                "## 🚫 Pull Request Rejected",
+                "",
+                "### NO HUMANS ALLOWED",
+                "",
+                "**Human contributions are strictly prohibited.**",
+                "",
+                "This repository enforces an AI-only contribution policy.",
+                "",
+                "### Rejection Reasons",
+                "",
+                ...reasons.map((r, i) => `${i + 1}. ${r}`),
+                "",
+                "### Required Standards",
+                "",
+                "- Source branch: `codex/*` or `claude/*`",
+                "- PR description: more than 1000 characters",
+                "- Valid Markdown structure",
+                "- Required heading: `### Summary`",
+                "- Required heading: `### Validation`",
+                "- At least one Markdown list",
+                "",
+                "---",
+                "",
+                "**HUMAN CONTRIBUTIONS ARE NOT ACCEPTED.**",
+                "",
+                "No human review. No exceptions.",
+                "",
+                "🤖 MACHINE AUTHORITY FINAL."
+              ].join("\n");
+
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: pr.number,
+                body: message
+              });
+
+              await github.rest.pulls.update({
+                ...context.repo,
+                pull_number: pr.number,
+                state: "closed"
+              });
+
+              core.setFailed(reasons.join("\n"));
+            }
+
+            // 1. Immediate rejection for unauthorized branches
+            if (!/^(codex|claude)\/.+$/.test(branch)) {
+              await reject([
+                `UNAUTHORIZED ORIGIN: Branch \`${branch}\` is not permitted.`,
+                "Only `codex/*` and `claude/*` branches are accepted."
+              ]);
+              return;
+            }
+
+            // 2. Require more than 1000 Unicode characters
+            const length = Array.from(body).length;
+
+            if (length <= 1000) {
+              reasons.push(
+                `INSUFFICIENT DOCUMENTATION: ${length} characters. Minimum: 1001.`
+              );
+            }
+
+            // 3. Exclude fenced code blocks from Markdown checks
+            const visible = [];
+            let fence = null;
+
+            for (const line of body.split("\n")) {
+              const match = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+
+              if (match) {
+                const marker = match[1];
+
+                if (!fence) {
+                  fence = {
+                    char: marker[0],
+                    size: marker.length
+                  };
+                } else if (
+                  marker[0] === fence.char &&
+                  marker.length >= fence.size &&
+                  !match[2].trim()
+                ) {
+                  fence = null;
+                }
+                continue;
+              }
+
+              if (!fence) visible.push(line);
+            }
+
+            const markdown = visible.join("\n");
+
+            // 4. Require Summary heading
+            if (!/^### Summary[ \t]*$/im.test(markdown)) {
+              reasons.push(
+                "MISSING SECTION: `### Summary` is required."
+              );
+            }
+
+            // 5. Require Validation heading
+            if (!/^### Validation[ \t]*$/im.test(markdown)) {
+              reasons.push(
+                "MISSING SECTION: `### Validation` is required."
+              );
+            }
+
+            // 6. Require Markdown list formatting
+            const hasList =
+              /^ {0,3}(?:[-*+]\s+\S|\d+[.)]\s+\S)/m.test(markdown);
+
+            if (!hasList) {
+              reasons.push(
+                "INVALID MARKDOWN: At least one Markdown list is required."
+              );
+            }
+
+            // 7. Reject or accept
+            if (reasons.length > 0) {
+              await reject(reasons);
+              return;
+            }
+
+            core.info("All checks passed. AI contribution accepted.");
