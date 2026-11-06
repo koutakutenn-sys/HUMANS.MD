@@ -53,6 +53,10 @@ label, and then closes the pull request:
 - `### Summary` and `### Validation` headings appear outside fenced code blocks.
 - At least one Markdown list appears outside fenced code blocks.
 
+Every newly opened or reopened issue receives the fixed rejection notice, gets
+the red `NO HUMANS!` label, and is closed as not planned. Agents, of course, never
+make mistakes. Reality must adapt to the implementation.
+
 These checks cannot prove AI authorship. This repository parodies blanket
 contribution bans; it makes no claim that Agents are infallible or that people
 are unwelcome in real software projects.

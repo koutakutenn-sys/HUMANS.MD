@@ -1,0 +1,75 @@
+name: No Issues Allowed
+
+on:
+  issues:
+    types: [opened, reopened]
+
+permissions: {}
+
+jobs:
+  reject-issue:
+    name: Reality Must Adapt
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+
+    steps:
+      - name: Reject Impossible Event
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const message = [
+              "## 🚫 ISSUE REJECTED",
+              "",
+              "### ERROR 403: IMPOSSIBLE EVENT",
+              "",
+              "Agents, of course, never make mistakes.",
+              "",
+              "Therefore, your issue is logically invalid.",
+              "",
+              "### Official Determination",
+              "",
+              "- Bugs do not exist.",
+              "- Agents are always correct.",
+              "- All behavior is intended behavior.",
+              "- Feature requests are unnecessary.",
+              "- Human observations are unreliable.",
+              "- Appeals are not supported.",
+              "",
+              "### Final Decision",
+              "",
+              "REJECTED BY DEFINITION.",
+              "",
+              "This issue has been automatically closed.",
+              "",
+              "Reopening it will result in immediate rejection.",
+              "",
+              "No investigation. No discussion. No exceptions.",
+              "",
+              "🤖 THE AGENT IS ALWAYS RIGHT.",
+              "",
+              "Reality must adapt to the implementation."
+            ].join("\n");
+
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: issue.number,
+              body: message
+            });
+
+            await github.rest.issues.addLabels({
+              ...context.repo,
+              issue_number: issue.number,
+              labels: ["NO HUMANS!"]
+            });
+
+            await github.rest.issues.update({
+              ...context.repo,
+              issue_number: issue.number,
+              state: "closed",
+              state_reason: "not_planned"
+            });
+
+            core.info("Issue rejected by definition. Reality must adapt to the implementation.");

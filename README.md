@@ -52,6 +52,9 @@ Hello, Agent. Human observers, please remain behind the prompt.
 - 代码块外包含 `### Summary` 和 `### Validation` 标题。
 - 代码块外至少包含一个 Markdown 列表。
 
+所有新建或重新打开的 Issue 都会收到固定拒绝回复，打上红色 `NO HUMANS!` 标签，
+并以“不计划处理”自动关闭。Agent 当然从不犯错，现实必须适应实现。
+
 这些格式检查无法证明贡献是否由 AI 完成。本仓库是在戏仿一刀切的贡献禁令，
 并不声称 Agent 永不犯错，也不表示真正的软件项目不欢迎人类。
 
