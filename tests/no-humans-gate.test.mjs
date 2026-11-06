@@ -14,7 +14,7 @@ function loadPolicy() {
 }
 
 async function evaluate(branch, body) {
-  const state = { comments: [], closed: false, failure: null, info: [] };
+  const state = { comments: [], labels: [], events: [], closed: false, failure: null, info: [] };
   const context = {
     repo: { owner: 'example', repo: 'parody' },
     payload: { pull_request: { number: 42, head: { ref: branch }, body } },
@@ -23,10 +23,16 @@ async function evaluate(branch, body) {
     issues: { createComment: async ({ issue_number, body }) => {
       assert.equal(issue_number, 42);
       state.comments.push(body);
+      state.events.push('comment');
+    }, addLabels: async ({ issue_number, labels }) => {
+      assert.equal(issue_number, 42);
+      state.labels.push(...labels);
+      state.events.push('label');
     } },
     pulls: { update: async ({ pull_number, state: nextState }) => {
       assert.equal(pull_number, 42);
       state.closed = nextState === 'closed';
+      state.events.push('close');
     } },
   } };
   const core = {
@@ -52,6 +58,7 @@ test('a compliant codex or claude contribution stays open', async () => {
     const result = await evaluate(branch, validBody);
     assert.equal(result.closed, false);
     assert.deepEqual(result.comments, []);
+    assert.deepEqual(result.labels, []);
     assert.equal(result.failure, null);
     assert.match(result.info.join('\n'), /All checks passed/);
   }
@@ -84,4 +91,16 @@ test('a long description still needs both sections and a visible list', async ()
   assert.match(noValidation.failure, /Validation/);
   const noList = await evaluate('codex/missing-list', '### Summary\nText\n### Validation\nText\n' + 'x'.repeat(1001));
   assert.match(noList.failure, /Markdown list/);
+});
+
+test('every rejected pull request receives the NO HUMANS! label before closing', async () => {
+  for (const [branch, body] of [
+    ['test/no-human-gate', validBody],
+    ['codex/short-description', 'Too short.'],
+  ]) {
+    const result = await evaluate(branch, body);
+    assert.deepEqual(result.labels, ['NO HUMANS!']);
+    assert.equal(result.closed, true);
+    assert.ok(result.events.indexOf('label') < result.events.indexOf('close'));
+  }
 });

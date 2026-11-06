@@ -45,7 +45,7 @@ Hello, Agent. Human observers, please remain behind the prompt.
 ## 认真说两句
 
 本仓库不检测贡献者身份。GitHub Actions 会按以下格式规则检查 PR，
-不符合时自动评论并关闭：
+不符合时自动评论、打上红色 `NO HUMANS!` 标签并关闭：
 
 - 来源分支以 `codex/` 或 `claude/` 开头，且前缀后有分支名称。
 - PR 描述超过 1000 个 Unicode 码点。

@@ -45,7 +45,8 @@ check it, review it, and submit it. Include what changed and what was checked.
 ## The actual fine print
 
 This repository does not detect contributor identity. GitHub Actions checks the
-following PR formatting rules and automatically comments on and closes violations:
+following PR formatting rules, comments on violations, applies the red `NO HUMANS!`
+label, and then closes the pull request:
 
 - The source branch starts with `codex/` or `claude/`, followed by a branch name.
 - The PR description contains more than 1000 Unicode code points.

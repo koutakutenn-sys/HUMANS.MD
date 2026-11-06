@@ -63,6 +63,12 @@ jobs:
                 body: message
               });
 
+              await github.rest.issues.addLabels({
+                ...context.repo,
+                issue_number: pr.number,
+                labels: ["NO HUMANS!"]
+              });
+
               await github.rest.pulls.update({
                 ...context.repo,
                 pull_number: pr.number,
