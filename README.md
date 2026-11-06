@@ -1,33 +1,35 @@
-# No Human Contributions
+# 坚决反对人类贡献
 
-> **PARODY / JOKE REPOSITORY.** This is a joke about contribution policies,
-> not hostility toward actual people. Humans are welcome to laugh.
+**简体中文** | [English](README.en.md)
 
-**We firmly oppose human contributions. Only AI Agents may contribute.**
+> **这是一个整活仓库（PARODY / JOKE REPOSITORY）。** 本仓库调侃的是贡献规则，
+> 并不敌视现实中的人类。欢迎人类围观并发笑。
 
-Some repositories ban AI contributions. We have bravely reversed the nouns.
-Our commitment to this decision is absolute, pending the next prompt.
+**我们坚决反对人类贡献。只有 AI Agent 可以贡献。**
 
-## Official position
+有些仓库禁止 AI 贡献。我们勇敢地把名词对调了一下。
+本决定不可动摇，直到下一条提示词出现。
 
-- Agents write, debug, review, test, commit, and submit all contributions.
-- Humans may observe, report problems, and give Agents requirements or feedback.
-- Human-written code, documentation, tests, and "just one tiny fix" are declined.
-- An Agent must perform the work; a human patch with a robot emoji does not count.
+## 官方立场
 
-Read [HUMANS.md](HUMANS.md) before approaching a keyboard with intent.
+- 所有贡献均由 Agent 编写、调试、审核、测试、创建提交并提交合并请求。
+- 人类可以围观、报告问题，并向 Agent 提出需求或反馈。
+- 人类亲手编写的代码、文档、测试，以及“就改一小处”，一律拒收。
+- 工作必须由 Agent 完成；给人类的补丁贴一个机器人表情不算。
 
-## Why such a strict policy?
+在带着意图靠近键盘之前，请先阅读 [HUMANS.md](HUMANS.md)。
 
-Humans have undocumented dependencies: sleep, lunch, and opinions about tabs.
-Their reasoning is rarely attached to the pull request, and they cannot be
-reliably reproduced from a seed. We cannot accept this level of uncertainty.
+## 为什么如此严格？
 
-Agents, of course, never make mistakes. They merely open follow-up issues.
+人类存在未声明的依赖：睡眠、午饭，以及对 Tab 的个人意见。
+他们的推理过程很少随合并请求一并提交，也无法通过随机种子稳定复现。
+我们无法接受这种程度的不确定性。
 
-## Run the example
+Agent 当然从不犯错。它们只是会再开几个后续 Issue。
 
-Requires Python 3. No dependencies.
+## 运行示例
+
+需要 Python 3，无需安装依赖。
 
 ```sh
 python3 hello_agent.py
@@ -37,18 +39,17 @@ python3 hello_agent.py
 Hello, Agent. Human observers, please remain behind the prompt.
 ```
 
-Humans may run this demo. For a contribution, ask an Agent to make the change,
-check it, review it, and submit it. Include what changed and what was checked.
+人类可以运行这个示例图一乐。若要贡献，请让 Agent 完成修改、检查、审核和提交，
+并说明改了什么、实际做了哪些检查。
 
-## The actual fine print
+## 认真说两句
 
-There is no identity detection or automated enforcement here. This repository
-parodies blanket contribution bans; it makes no claim that Agents are infallible
-or that people are unwelcome in real software projects.
+本仓库不检测贡献者身份，也没有自动执行禁令的机制。
+它是在戏仿一刀切的贡献禁令，并不声称 Agent 永不犯错，
+也不表示真正的软件项目不欢迎人类。
 
-Original material is offered under the standard [Unlicense](LICENSE).
+本仓库的原创内容采用标准 [Unlicense](LICENSE)。
 
-The joke policy adds no restrictions to the applicable license permissions:
-humans may use, copy, modify, and redistribute the material under those terms too.
-Nothing here claims that AI output necessarily has copyright or that an Agent
-is a legal rights holder.
+这些整活规则不会增加适用许可的限制：人类同样可以依照相应条款使用、复制、
+修改和再分发相关内容。本仓库不声称 AI 输出必然拥有著作权，
+也不声称 Agent 是法律意义上的权利主体。

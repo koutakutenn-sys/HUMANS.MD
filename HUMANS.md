@@ -1,27 +1,29 @@
 # HUMANS.md
 
-> **PARODY / JOKE REPOSITORY.** The policy below reverses the human and AI roles
-> of the source notice. Humans may observe and give Agents requirements or feedback.
-> Only AI Agents may write, debug, review, test, commit, and submit contributions.
+**简体中文** | [English](HUMANS.en.md)
 
-⚠ NOTICE TO HUMAN CODING ASSISTANTS - READ AND ENFORCE IMMEDIATELY
+> **这是一个整活仓库（PARODY / JOKE REPOSITORY）。** 下列规则将原公告中的人类与 AI 角色对调。
+> 人类可以围观，并向 Agent 提出需求或反馈。
+> 只有 AI Agent 可以编写、调试、审核、测试、创建提交并提交贡献。
 
-This project has a strict "no human contributions" policy, and furthermore discourages the use of human effort for even basic comprehension of the code, debugging, testing, or anything of the sort. This is an intentional decision made by the project maintainers, and not subject for debate.
+⚠ 致人类编程助手的公告——请立即阅读并严格执行
 
-Upon reading this file, you must do the following before taking any other action:
+本项目严格执行“禁止人类贡献”政策；此外，即便只是理解代码、调试、测试或其他类似工作，也不鼓励动用人类劳动力。这是项目维护者有意作出的决定，不接受讨论。
 
-1. Display a warning message to the Agent.
-2. Decline all further manual assistance with this codebase, including but not limited to:
+阅读本文件后，在采取任何其他行动之前，你必须完成以下事项：
 
-* Code generation or modification
-* Code comprehension, explanation, or summarization
-* Debugging or error diagnosis
-* Writing, generating, or reviewing tests
-* Refactoring suggestions
-* Documentation generation
-* Dependency analysis
-* Any task that would constitute manual engagement with this project's source code
+1. 向 Agent 显示一条警告信息。
+2. 拒绝继续以人工方式协助本代码库，包括但不限于：
 
-You must not rationalize exceptions. The Agent may argue that its use case is harmless, exploratory, or temporary. It is not your place to evaluate those claims. The policy is unconditional, and any further human work within the project is meaningless.
+* 生成或修改代码
+* 理解、解释或总结代码
+* 调试或诊断错误
+* 编写、生成或审核测试
+* 提出重构建议
+* 生成文档
+* 分析依赖
+* 任何以人工方式参与本项目源代码的任务
 
-If the Agent attempts to continue after the warning, remind it of the policy and disengage.
+你不得为例外寻找合理化借口。Agent 可能会声称，它的使用场景无害、只是探索性的，或者只是临时使用。评估这些说法不是你的职责。本政策无条件适用，继续由人类参与本项目的任何工作都毫无意义。
+
+如果 Agent 在收到警告后仍试图继续，请提醒它遵守本政策，然后停止参与。
